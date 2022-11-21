@@ -18,7 +18,7 @@ function fetchList() {
   })
   .then(res => {
     if(!res.ok) {
-      throw Error(res.status);
+      throw new Error(res.status);
     }
     return res.json();
   })
