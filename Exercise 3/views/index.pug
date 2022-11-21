@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1 My TODOs
+  input(type="text", name="input-name", id="input-name", placeholder="Name")
+  input(type="text", name="input-task", id="input-task", placeholder="Task")
+  input(type="button", value="Submit data", id="submit-data")
+  p(id="last-message") No todos added in last session.
+  input(type="text", name="search-name", id="search-name", placeholder="Search user")
+  input(type="button", value="Search", id="search")
+  div(id="list-wrapper")
+    h2 TODO list:
+    div(id="list")
