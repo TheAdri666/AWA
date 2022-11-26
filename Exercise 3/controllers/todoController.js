@@ -26,4 +26,4 @@ function addTodo(req, res) {
 
 module.exports = {
   addTodo
-}
+};
