@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const TodoCtrl= require('../controllers/todoController');
+const TodoCtrl = require('../controllers/todoController');
 
 router
   .route('/')
