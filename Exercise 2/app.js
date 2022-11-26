@@ -3,7 +3,7 @@ const app = express();
 const helloRouter = require('./routes/helloRouter');
 const echoRouter = require('./routes/echoRouter');
 const sumRouter = require('./routes/sumRouter');
-const listRouter = require('./routes/listRouter')
+const listRouter = require('./routes/listRouter');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
