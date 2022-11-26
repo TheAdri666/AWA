@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
-const helloRouter = require('./routers/helloRouter');
-const echoRouter = require('./routers/echoRouter');
-const sumRouter = require('./routers/sumRouter');
-const listRouter = require('./routers/listRouter')
+const helloRouter = require('./routes/helloRouter');
+const echoRouter = require('./routes/echoRouter');
+const sumRouter = require('./routes/sumRouter');
+const listRouter = require('./routes/listRouter')
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
