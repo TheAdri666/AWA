@@ -3,7 +3,6 @@ recipeList.setAttribute('id', 'recipe-list');
 document.body.appendChild(recipeList);
 
 function beautifyOutput(dataStream) {
-  console.log(dataStream)
   let output = '';
   const breakers = ['{', '}', '[', ']', ','];
   [...dataStream].forEach((c) => {
