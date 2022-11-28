@@ -38,7 +38,11 @@ function getRecipe(req, res) {
   }
   const foodIndex = getIndex(req);
   if (foodIndex === -1) {
-    return res.status(200).send({ msg: 'Recipe does not exist in database' });
+    return res.status(200).send({
+      name: req.params.food,
+      ingredients: [],
+      instructions: [],
+    });
   }
   return res.status(200).json(recipes[foodIndex]);
 }
