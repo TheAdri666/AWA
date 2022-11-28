@@ -12,6 +12,10 @@
         "ecmaVersion": "latest"
     },
     "rules": {
-        "no-plusplus": "off"
+        "no-plusplus": "off",
+        "no-prototype-builtins": "off",
+        "arrow-parens": "off",
+        "no-console": "off",
+        "no-restricted-syntax": "off"
     }
 }

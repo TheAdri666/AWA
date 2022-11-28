@@ -40,9 +40,36 @@ function getRecipe(req, res) {
   if (foodIndex === -1) {
     return res.status(200).send({ msg: 'Recipe does not exist in database' });
   }
-  return res.status(200).send(recipes[foodIndex]);
+  return res.status(200).json(recipes[foodIndex]);
+}
+
+function isValid(recipe) {
+  let value = true;
+  if (
+    recipe.name === null || recipe.name === undefined
+  || recipe.ingredients === null || recipe.ingredients === undefined
+  || recipe.instructions === null || recipe.instructions === undefined
+  || typeof recipe.name !== 'string'
+  || typeof recipe.ingredients !== 'object'
+  || typeof recipe.instructions !== 'object') {
+    value = false;
+  }
+  return value;
+}
+
+function addRecipe(req, res) {
+  if (!req || !req.body) {
+    return res.status(400).send({ msg: 'Error' });
+  }
+  const recipe = { ...req.body };
+  if (!recipe || !isValid(recipe)) {
+    return res.status(200).send({ msg: 'Recipe can\'t be empty' });
+  }
+  recipes.push(recipe);
+  return res.status(200).send(recipe);
 }
 
 module.exports = {
   getRecipe,
+  addRecipe,
 };

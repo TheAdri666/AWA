@@ -6,7 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Official Recipe Wiki</title>
     <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
     <script src="js/index.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Legitimate Recipe Wiki</a>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="col" id="recipe-list"></div>
+      <div class="col">
+        <h4>Name</h4>
+        <input type="text" id="name-text" />
+        <h4>Ingredients</h4>
+        <textarea id="ingredients-text"></textarea>
+        <button id="add-ingredient" type="button" class="btn">
+          Add ingredient
+        </button>
+        <h4>Instructions</h4>
+        <textarea id="instructions-text"></textarea>
+        <button id="add-instruction" type="button" class="btn">
+          Add instruction
+        </button>
+        <button id="submit" type="submit" class="btn">Submit</button>
+        <input
+          type="file"
+          id="image-input"
+          accept="image/png, image/*"
+          multiple
+        />
+      </div>
+    </div>
+  </body>
 </html>
