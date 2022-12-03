@@ -9,16 +9,18 @@ const instructionInput = document.getElementById('instructions-text');
 // eslint-disable-next-line no-unused-vars
 const nameInput = document.getElementById('name-text');
 const imageInput = document.getElementById('image-input');
+const searchInput = document.getElementById('search');
+const searchButton = document.querySelector('.label-icon');
 
-function beautifyOutput(dataStream) {
+function commaToBr(string) {
   let output = '';
-  const breakers = ['{', '}', '[', ']', ','];
-  [...dataStream].forEach((c) => {
-    output = output.concat(c);
-    if (breakers.includes(c)) {
+  for (const c of string) {
+    if (c !== ',') {
+      output = output.concat(c);
+    } else {
       output = output.concat('<br>');
     }
-  });
+  }
   return output;
 }
 
@@ -35,8 +37,7 @@ function fetchRecipe(food) {
     .then((data) => {
       const listItem = document.createElement('div');
       listItem.setAttribute('class', 'list-item');
-      const output = beautifyOutput(JSON.stringify(data));
-      listItem.innerHTML = output;
+      listItem.innerHTML = `<h3>Name</h3><p>${commaToBr(data.name)}<p><br><h3>Ingredients</h3><p>${commaToBr(data.ingredients.toString())}</p><br><h3>Instructions</h3><p>${commaToBr(data.instructions.toString())}</p><br>`;
       recipeList.appendChild(listItem);
     });
 }
@@ -60,6 +61,7 @@ function addInstruction() {
   recipe.instructions.push(instructionInput.value);
   console.log('Instruction added: ', instructionInput.value);
 }
+
 function addRecipe() {
   recipe.name = nameInput.value;
   const body = recipe;
@@ -104,6 +106,15 @@ ingredientButton.addEventListener('click', addIngredient);
 instructionButton.addEventListener('click', addInstruction);
 submitButton.addEventListener('click', addRecipe);
 submitButton.addEventListener('click', sendImages);
+searchButton.addEventListener('click', () => {
+  recipeList.innerHTML = '';
+  fetchRecipe(searchInput.value);
+});
+searchInput.addEventListener('keypress', (event) => {
+  if (event.key === 'Enter') {
+    searchButton.click();
+  }
+});
 
 fetchRecipe('pizza');
 fetchRecipe('pasta');

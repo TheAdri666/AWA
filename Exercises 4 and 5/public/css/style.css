@@ -1,3 +1,19 @@
 .list-item {
   margin: 1rem;
 }
+
+.input-field {
+  width: 40%;
+}
+
+#search {
+  height: fit-content;
+}
+
+.label-icon {
+  font-size: fit-content !important;
+}
+
+.search-icon {
+  font-size: 0.8rem !important;
+}

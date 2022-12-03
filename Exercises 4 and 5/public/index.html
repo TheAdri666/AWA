@@ -11,13 +11,21 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
     <script src="js/index.js" defer></script>
   </head>
   <body>
     <nav>
-      <div class="nav-wrapper">
+      <div id="nav-wrapper">
         <a href="#" class="brand-logo">Legitimate Recipe Wiki</a>
+        <form>
+          <div class="input-field right">
+            <input id="search" type="search" required />
+            <label class="label-icon" for="search"
+              ><i class="material-icons search-icon">search</i></label
+            >
+            <i class="material-icons">close</i>
+          </div>
+        </form>
       </div>
     </nav>
     <div class="container">
