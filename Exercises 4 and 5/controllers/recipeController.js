@@ -53,7 +53,6 @@ function getRecipe(req, res) {
       return res.status(500).send({ msg: 'Internal Server Error' });
     }
     if (!recipe) {
-      console.log('no recipe');
       return res.status(200).send({
         name: req.params.food,
         ingredients: [],
