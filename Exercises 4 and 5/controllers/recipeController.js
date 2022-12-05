@@ -8,11 +8,6 @@ const pizzaRecipe = new Recipe({
     'Put the pizza in the oven for the amount of time stated in the pizza package',
   ],
 });
-pizzaRecipe.save(err => {
-  if (err) {
-    console.log(err);
-  }
-});
 
 const pastaRecipe = new Recipe({
   name: 'pasta',
@@ -26,23 +21,27 @@ const pastaRecipe = new Recipe({
   ],
 });
 
-pastaRecipe.save(err => {
+Recipe.findOne({ name: 'pizza' }, (err, recipe) => {
   if (err) {
     console.log(err);
   }
+  if (!recipe) {
+    pizzaRecipe.save(error => {
+      console.log(error);
+    });
+  }
 });
 
-/* function getIndex(req) {
-  let index = -1;
-  const { food } = req.params;
-  for (let i = 0; i < recipes.length; i++) {
-    if (recipes[i].name === food) {
-      index = i;
-      break;
-    }
+Recipe.findOne({ name: 'pasta' }, (err, recipe) => {
+  if (err) {
+    console.log(err);
   }
-  return index;
-} */
+  if (!recipe) {
+    pastaRecipe.save(error => {
+      console.log(error);
+    });
+  }
+});
 
 function getRecipe(req, res) {
   if (!req || !req.params) {
@@ -57,25 +56,13 @@ function getRecipe(req, res) {
         name: req.params.food,
         ingredients: [],
         instructions: [],
+        categories: [],
+        images: [],
       });
     }
     return res.status(200).send(recipe);
   });
 }
-
-/* function isValid(recipe) {
-  let value = true;
-  if (
-    recipe.name === null || recipe.name === undefined
-  || recipe.ingredients === null || recipe.ingredients === undefined
-  || recipe.instructions === null || recipe.instructions === undefined
-  || typeof recipe.name !== 'string'
-  || typeof recipe.ingredients !== 'object'
-  || typeof recipe.instructions !== 'object') {
-    value = false;
-  }
-  return value;
-} */
 
 function addRecipe(req, res, next) {
   if (!req || !req.body) {
@@ -84,7 +71,7 @@ function addRecipe(req, res, next) {
   if (!req.body.name) {
     return res.status(400).send({ msg: 'Error, cannot submit empty recipe' });
   }
-  return Recipe.findOne({ ...req.body }, (err, recipe) => {
+  return Recipe.findOne({ name: req.body.name }, (err, recipe) => {
     if (err) {
       return next(err);
     }
@@ -94,7 +81,7 @@ function addRecipe(req, res, next) {
     const newRecipe = new Recipe({ ...req.body });
     return newRecipe.save(error => {
       if (error) {
-        return next(res);
+        return next(error);
       }
       return res.status(200).send(newRecipe);
     });

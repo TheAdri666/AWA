@@ -17,3 +17,19 @@
 .search-icon {
   font-size: 0.8rem !important;
 }
+
+#diet-selector {
+  margin: 10px;
+  padding: 10px;
+  display: grid;
+  align-items: center; 
+  height: 10vh;
+  width: 90%;
+  border: solid 2px gray;
+}
+
+img {
+  height: 30rem;
+  aspect-ratio: 3 / 4;
+  margin: 1rem
+}

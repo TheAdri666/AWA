@@ -5,4 +5,8 @@ router
   .route('/')
   .post(ImageCtrl.addImages);
 
+router
+  .route('/:id')
+  .get(ImageCtrl.getImageById);
+
 module.exports = router;
