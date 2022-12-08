@@ -21,8 +21,9 @@ function addImages(req, res, next) {
       if (err) {
         next(err);
       }
-      Recipe.findOne({ name: recipe }).exec()
-        .then(data => {
+      Recipe.findOne({ name: recipe })
+        .exec()
+        .then((data) => {
           data.images.push(result._id);
           data.save();
         });
