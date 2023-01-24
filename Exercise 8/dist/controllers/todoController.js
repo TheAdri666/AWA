@@ -1,27 +1,26 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.listTodos = exports.addTodos = void 0;
-let todoLists = [];
+const todoLists = [];
 function addTodos(req, res) {
-    console.log(req.body);
     if (!req.session.user) {
         res.status(401).send('Unauthorized');
         return;
     }
-    const { todos } = req.body;
+    const { todo } = req.body;
     const userTodoList = todoLists.find((todoList) => todoList.id === req.session.user.id);
     if (userTodoList) {
-        userTodoList.todos.push(...todos);
+        userTodoList.todos.push(todo);
         res.send(userTodoList);
+        return;
     }
-    else {
-        const newTodoList = {
-            id: req.session.user.id,
-            todos
-        };
-        todoLists.push(newTodoList);
-        res.send(newTodoList);
-    }
+    const newTodoList = {
+        id: req.session.user.id,
+        todos: [todo]
+    };
+    todoLists.push(newTodoList);
+    res.send(newTodoList);
+    return;
 }
 exports.addTodos = addTodos;
 function listTodos(req, res) {
@@ -29,13 +28,11 @@ function listTodos(req, res) {
         res.status(401).send({ msg: 'Unauthorized' });
         return;
     }
-    const todos = [];
+    const allTodos = [];
     for (const list of todoLists) {
-        for (const todo of list.todos) {
-            todos.push(todo);
-        }
-        res.status(200).send({ todos });
-        return;
+        allTodos.push(list);
     }
+    res.send(allTodos);
+    return;
 }
 exports.listTodos = listTodos;

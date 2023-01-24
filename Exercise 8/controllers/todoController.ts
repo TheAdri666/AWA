@@ -1,16 +1,11 @@
 import { Request, Response } from 'express';
 
-interface Todo {
-  name: string;
-  description: string;
-}
-
 interface TodoList {
   id: number;
-  todos: Todo[];
+  todos: string[];
 }
 
-let todoLists: TodoList[] = [];
+const todoLists: TodoList[] = [];
 
 function addTodos(req: Request, res: Response) {
   if (!req.session.user) {
@@ -18,21 +13,23 @@ function addTodos(req: Request, res: Response) {
     return;
   }
 
-  const { todos } = req.body;
+  const { todo } = req.body;
 
-  const userTodoList = todoLists.find((todoList) => todoList.id === req.session.user!.id);
+  const userTodoList: TodoList | undefined = todoLists.find((todoList) => todoList.id === req.session.user!.id);
 
   if (userTodoList) {
-    userTodoList.todos.push(...todos);
+    userTodoList.todos.push(todo);
     res.send(userTodoList);
-  } else {
-    const newTodoList: TodoList = {
-      id: req.session.user.id,
-      todos
-    };
-    todoLists.push(newTodoList);
-    res.send(newTodoList);
+    return;
   }
+
+  const newTodoList: TodoList = {
+    id: req.session.user.id,
+    todos: [todo]
+  };
+  todoLists.push(newTodoList);
+  res.send(newTodoList);
+  return;
 }
 
 function listTodos(req: Request, res: Response) {
@@ -40,15 +37,12 @@ function listTodos(req: Request, res: Response) {
     res.status(401).send({ msg: 'Unauthorized' });
     return;
   }
-
-  const todos: Todo[] = [];
+  const allTodos: TodoList[] = [];
   for (const list of todoLists) {
-    for (const todo of list.todos) {
-      todos.push(todo);
-    }
-    res.status(200).send({ todos });
-    return;
+    allTodos.push(list);
   }
+  res.send(allTodos);
+  return;
 }
 
 export {
