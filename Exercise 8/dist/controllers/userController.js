@@ -11,7 +11,7 @@ function generateId() {
 }
 function registerUser(req, res) {
     if (req.session.user) {
-        res.redirect('/');
+        res.redirect('/api/redirect');
         return;
     }
     const { username, password } = req.body;
@@ -33,7 +33,7 @@ function registerUser(req, res) {
 exports.registerUser = registerUser;
 function loginUser(req, res) {
     if (req.session.user) {
-        res.redirect('/');
+        res.redirect('/api/redirect');
         return;
     }
     const { username, password } = req.body;

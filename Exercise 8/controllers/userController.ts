@@ -15,7 +15,7 @@ function generateId(): number {
 
 function registerUser(req: Request, res: Response): void {
   if (req.session.user) {
-    res.redirect('/');
+    res.redirect('/api/redirect');
     return;
   }
 
@@ -42,7 +42,7 @@ function registerUser(req: Request, res: Response): void {
 
 function loginUser(req: Request, res: Response): void {
   if (req.session.user) {
-    res.redirect('/');
+    res.redirect('/api/redirect');
     return;
   }
 

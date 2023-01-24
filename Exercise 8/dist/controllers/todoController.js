@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.listTodos = exports.addTodos = void 0;
 let todoLists = [];
 function addTodos(req, res) {
+    console.log(req.body);
     if (!req.session.user) {
         res.status(401).send('Unauthorized');
         return;

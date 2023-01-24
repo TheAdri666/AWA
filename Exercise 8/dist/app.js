@@ -27,6 +27,9 @@ app.use((0, express_session_1.default)({
 }));
 app.use(passport_1.default.initialize());
 app.use(passport_1.default.session());
+app.use('/api/redirect', (req, res) => {
+    res.send({ msg: 'You were redirected here for some reason. Go back!' });
+});
 app.use('/api/user', userRouter_1.default);
 app.use('/api/todos', todoRouter_1.default);
 app.use('/api/secret', secretRouter_1.default);

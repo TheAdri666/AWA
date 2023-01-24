@@ -1,4 +1,4 @@
-import express, { Express } from 'express';
+import express, { Express, Request, Response } from 'express';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
@@ -38,6 +38,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use('/api/redirect', (req: Request, res: Response) => {
+  res.send({ msg: 'You were redirected here for some reason. Go back!' });
+})
 app.use('/api/user', userRouter);
 app.use('/api/todos', todoRouter);
 app.use('/api/secret', secretRouter);
