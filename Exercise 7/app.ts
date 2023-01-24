@@ -1,4 +1,4 @@
-import express, { Express }  from 'express';
+import express, { Express } from 'express';
 import vehicleRouter from './routers/vehicleRouter';
 import helloRouter from './routers/helloRouter';
 
@@ -10,7 +10,5 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/vehicle', vehicleRouter);
 app.use('/hello', helloRouter);
-
-app.use(express.static('public'));
 
 export default app;

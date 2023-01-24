@@ -39,7 +39,7 @@ function addVehicle(req: Request, res: Response): void {
   res.status(201).send('Vehicle added');
 }
 
-function getVehicle(req: Request, res:Response): void {
+function getVehicle(req: Request, res: Response): void {
   const model: string = req.params.model;
   const vehicle: Vehicle | undefined = vehicles.find((v) => v.model === model);
   if (vehicle) {
