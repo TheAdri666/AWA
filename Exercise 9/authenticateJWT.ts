@@ -12,7 +12,6 @@ function authenticateJWT(req: Request, res: Response, next: NextFunction) {
       throw new Error();
     }
     const decoded = jwt.verify(token, process.env.SECRET!);
-    console.log(decoded);
     (req as CustomRequest).token = decoded;
     next();
   } catch (err) {
