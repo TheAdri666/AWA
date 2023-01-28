@@ -53,7 +53,11 @@ function login(req, res) {
         if (!validPassword) {
             return res.status(401).send("Email or password is incorrect");
         }
-        const token = jsonwebtoken_1.default.sign({ _id: user._id }, process.env.SECRET, { expiresIn: "1h" });
+        const jwtPayload = {
+            id: user._id,
+            email: user.email
+        };
+        const token = jsonwebtoken_1.default.sign(jwtPayload, process.env.SECRET, { expiresIn: "1h" });
         res.json({ token });
     });
 }

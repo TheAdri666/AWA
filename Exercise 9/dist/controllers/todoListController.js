@@ -10,25 +10,30 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addTodos = void 0;
-const todoModel_1 = require("../models/todoModel");
+const todoListModel_1 = require("../models/todoListModel");
+const userModel_1 = require("../models/userModel");
 function addTodos(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const user = req.user;
+        const token = req.token;
+        const user = yield userModel_1.User.findOne({ email: token.email });
+        if (!user) {
+            res.status(400).send({ msg: 'Something went wrong' });
+        }
         const { items } = req.body;
         try {
-            const todo = yield todoModel_1.TodoList.findOne({ user });
-            if (todo) {
-                todo.items = [...todo.items, ...items];
-                yield todo.save();
+            const todoList = yield todoListModel_1.TodoList.findOne({ email: user.email });
+            if (todoList) {
+                todoList.items = [...todoList.items, ...items];
+                yield todoList.save();
             }
             else {
-                const newTodo = new todoModel_1.TodoList({ user, items });
-                yield newTodo.save();
+                const newTodoList = new todoListModel_1.TodoList({ user, items });
+                yield newTodoList.save();
             }
-            res.json({ message: "Todo list created/updated successfully" });
+            res.json({ message: 'Todo list created/updated successfully' });
         }
         catch (error) {
-            res.status(500).json({ message: "Error creating/updating todo list" });
+            res.status(500).json({ message: 'Error creating/updating todo list' });
         }
     });
 }
