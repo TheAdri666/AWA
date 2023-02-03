@@ -16,4 +16,5 @@ app.use(express_1.default.urlencoded({ extended: true }));
 app.use('/api/user', userRouter_1.default);
 app.use('/api/todos', todoListRouter_1.default);
 app.use('/api/private', privateRouter_1.default);
+app.use(express_1.default.static('public'));
 exports.default = app;

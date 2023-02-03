@@ -16,4 +16,6 @@ app.use('/api/user', userRouter);
 app.use('/api/todos', todoListRouter)
 app.use('/api/private', privateRouter)
 
+app.use(express.static('public'))
+
 export default app;

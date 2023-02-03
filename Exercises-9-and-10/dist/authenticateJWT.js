@@ -13,7 +13,6 @@ function authenticateJWT(req, res, next) {
             throw new Error();
         }
         const decoded = jsonwebtoken_1.default.verify(token, process.env.SECRET);
-        console.log(decoded);
         req.token = decoded;
         next();
     }
