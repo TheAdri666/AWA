@@ -17,4 +17,5 @@ app.use('/api/user', userRouter_1.default);
 app.use('/api/todos', todoListRouter_1.default);
 app.use('/api/private', privateRouter_1.default);
 app.use(express_1.default.static('public'));
+app.use('/', express_1.default.static('public', { index: 'home.html' }));
 exports.default = app;

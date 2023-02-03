@@ -13,9 +13,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/user', userRouter);
-app.use('/api/todos', todoListRouter)
-app.use('/api/private', privateRouter)
+app.use('/api/todos', todoListRouter);
+app.use('/api/private', privateRouter);
 
-app.use(express.static('public'))
+app.use(express.static('public'));
+app.use('/', express.static('public', { index: 'home.html' }));
 
 export default app;

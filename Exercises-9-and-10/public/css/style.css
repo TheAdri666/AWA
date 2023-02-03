@@ -1,0 +1,9 @@
+h1 {
+  width: fit-content;
+}
+
+#links {
+  width: 120px;
+  display: flex;
+  justify-content: space-between;
+}
