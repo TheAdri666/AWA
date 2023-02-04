@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { Request, Response } from 'express';
-import { User } from "../models/userModel";
+import { User } from "../models/User";
 import { validationResult } from 'express-validator';
 
 async function register(req: Request, res: Response) {
@@ -43,7 +43,7 @@ async function login(req: Request, res: Response) {
     id: user._id,
     email: user.email
   }
-  const token = jwt.sign(jwtPayload, process.env.SECRET!, { expiresIn: "1h" });
+  const token = jwt.sign(jwtPayload, process.env.SECRET!, { expiresIn: '1d' });
   res.json({ token });
 }
 

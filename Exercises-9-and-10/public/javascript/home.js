@@ -11,11 +11,11 @@ const isLoggedIn = checkLoggedIn();
 function displayRegisterAndLoginElements() {
   const linksDiv = document.getElementById('links');
   const registerLink = document.createElement('a');
-  registerLink.href = 'http://localhost:3000/register.html';
+  registerLink.href = '/register.html';
   registerLink.innerHTML = 'Register';
 
   const loginLink = document.createElement('a');
-  loginLink.href = 'http://localhost:3000/login.html';
+  loginLink.href = '/login.html';
   loginLink.innerHTML = 'Login';
 
   linksDiv.appendChild(registerLink);
@@ -43,14 +43,81 @@ function displayEmailAndLogoutElements() {
   const logoutButton = document.createElement('input');
   logoutButton.type = 'submit';
   logoutButton.value = 'Logout'
+  logoutButton.setAttribute('id', 'logout');
   logoutButton.addEventListener('click', logout);
 
   document.body.appendChild(emailParagraph);
   document.body.appendChild(logoutButton);
 }
 
+function addTodo() {
+  const url = new URL('http://localhost:3000/api/todos');
+  const headers = new Headers();
+  headers.append('Authorization', `Bearer ${localStorage.getItem('auth_token')}`);
+  headers.append('Content-Type', 'application/json');
+
+  const body = JSON.stringify({
+    'items': [ addItemInput.value ]
+  });
+
+  const requestOptions = {
+    method: 'POST',
+    headers,
+    body,
+    redirect: 'follow'
+  };
+
+  fetch(url, requestOptions)
+    .then((res) => {
+    if(!res.ok) {
+      throw new Error(res.status);
+    }
+    return res.json();
+    })
+    .then((data) => {
+      console.log(data);
+    });
+}
+
+const addItemInput = document.getElementById('add-item');
+addItemInput.addEventListener('keypress', (event) => {
+  if (event.key === 'Enter') {
+    addTodo();
+  }
+});
+
+function showTodos() {
+  const todosDiv = document.getElementById('todos');
+
+  const headers = new Headers();
+  headers.append('Authorization', `Bearer ${localStorage.getItem('auth_token')}`);
+
+  const requestOptions = {
+    method: 'GET',
+    headers,
+    redirect: 'follow'
+  };
+
+  fetch("http://localhost:3000/api/todos", requestOptions)
+    .then((res) =>{
+      if (!res.ok) {
+        throw new Error(res.status);
+      }
+      return res.json();
+    })
+    .then((todoList) => {
+      const { items } = todoList;
+      items.forEach((item) => {
+        itemParagraph = document.createElement('p');
+        itemParagraph.innerHTML = item;
+        todosDiv.appendChild(itemParagraph);
+      })
+    });
+}
+
 if (isLoggedIn) {
   displayEmailAndLogoutElements();
+  showTodos();
 } else {
   displayRegisterAndLoginElements();
 }

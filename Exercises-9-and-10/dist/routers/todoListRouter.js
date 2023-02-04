@@ -29,5 +29,6 @@ const authenticateJWT_1 = require("../authenticateJWT");
 const todoListRouter = (0, express_1.Router)();
 todoListRouter
     .route('/')
-    .post(authenticateJWT_1.authenticateJWT, TodoListCtrl.addTodos);
+    .post(authenticateJWT_1.authenticateJWT, TodoListCtrl.addTodos)
+    .get(authenticateJWT_1.authenticateJWT, TodoListCtrl.getUserTodoList);
 exports.default = todoListRouter;

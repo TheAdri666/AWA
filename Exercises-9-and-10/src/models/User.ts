@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-const userModel = new Schema({
+const userSchema = new Schema({
   email: {
     type: String,
     required: true,
@@ -14,7 +14,7 @@ const userModel = new Schema({
   },
 });
 
-const User = mongoose.model('User', userModel);
+const User = mongoose.model('User', userSchema);
 
 export {
   User

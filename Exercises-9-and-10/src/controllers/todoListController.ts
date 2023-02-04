@@ -1,10 +1,8 @@
 import { Request, Response } from 'express';
-import { TodoList } from '../models/todoListModel';
-import mongoose from 'mongoose';
+import { TodoList } from '../models/TodoList';
 import { CustomRequest } from '../authenticateJWT';
 import { JwtPayload } from 'jsonwebtoken';
-import userRouter from '../routers/userRouter';
-import { User } from '../models/userModel';
+import { User } from '../models/User';
 
 async function addTodos(req: Request, res: Response) {
   const token = (req as CustomRequest).token as JwtPayload;
@@ -14,7 +12,7 @@ async function addTodos(req: Request, res: Response) {
   }
   const { items } = req.body;
   try {
-    const todoList = await TodoList.findOne({ email: user!.email });
+    const todoList = await TodoList.findOne({ user });
     if (todoList) {
       todoList.items = [...todoList.items, ...items];
       await todoList.save();
@@ -28,6 +26,18 @@ async function addTodos(req: Request, res: Response) {
   }
 }
 
+async function getUserTodoList(req: Request, res: Response) {
+  const token = (req as CustomRequest).token as JwtPayload;
+  const user = await User.findOne({ email: token.email });
+  const todoList = await TodoList.findOne({ user });
+
+  if (!todoList) {
+    return res.send(new TodoList());
+  }
+  return res.send(todoList);
+}
+
 export {
   addTodos,
+  getUserTodoList,
 }

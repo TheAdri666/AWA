@@ -15,11 +15,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.login = exports.register = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const userModel_1 = require("../models/userModel");
+const User_1 = require("../models/User");
 const express_validator_1 = require("express-validator");
 function register(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const userExists = yield userModel_1.User.findOne({ email: req.body.email });
+        const userExists = yield User_1.User.findOne({ email: req.body.email });
         if (userExists) {
             return res.status(403).send({ email: "Email already in use." });
         }
@@ -29,7 +29,7 @@ function register(req, res) {
         }
         const salt = yield bcryptjs_1.default.genSalt(10);
         const hashedPassword = yield bcryptjs_1.default.hash(req.body.password, salt);
-        const user = new userModel_1.User({
+        const user = new User_1.User({
             email: req.body.email,
             password: hashedPassword,
         });
@@ -45,7 +45,7 @@ function register(req, res) {
 exports.register = register;
 function login(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const user = yield userModel_1.User.findOne({ email: req.body.email });
+        const user = yield User_1.User.findOne({ email: req.body.email });
         if (!user) {
             return res.status(401).send("Email or password is incorrect");
         }
@@ -57,7 +57,7 @@ function login(req, res) {
             id: user._id,
             email: user.email
         };
-        const token = jsonwebtoken_1.default.sign(jwtPayload, process.env.SECRET, { expiresIn: "1h" });
+        const token = jsonwebtoken_1.default.sign(jwtPayload, process.env.SECRET, { expiresIn: '1d' });
         res.json({ token });
     });
 }

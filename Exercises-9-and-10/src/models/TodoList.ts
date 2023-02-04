@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-const todoListModel = new Schema({
+const todoListSchema = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
@@ -10,7 +10,7 @@ const todoListModel = new Schema({
   items: [String]
 });
 
-const TodoList = mongoose.model('Todo', todoListModel);
+const TodoList = mongoose.model('TodoList', todoListSchema);
 
 export {
   TodoList
