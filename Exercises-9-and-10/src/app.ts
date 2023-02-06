@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from 'express';
+import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import userRouter from './routers/userRouter';
 import todoListRouter from './routers/todoListRouter';
