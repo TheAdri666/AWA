@@ -98,7 +98,7 @@ function showTodos() {
     redirect: 'follow'
   };
 
-  fetch("http://localhost:3000/api/todos", requestOptions)
+  fetch('http://localhost:3000/api/todos', requestOptions)
     .then((res) =>{
       if (!res.ok) {
         throw new Error(res.status);
