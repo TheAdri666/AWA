@@ -9,12 +9,8 @@ function App() {
       <div className="App">
         <h1>Books</h1>
         <Routes>
-          <Route exact path="/">
-            <BookForm />
-          </Route>
-          <Route path="/book/:bookName">
-            <Book />
-          </Route>
+          <Route exact path="/" element={<BookForm />} />
+          <Route path="/book/:bookName" element={<Book />}/>
           <Route path="*">
             <h1>404</h1>
             <p>This is not the webpage you are looking for.</p>
