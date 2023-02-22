@@ -12,8 +12,10 @@ function App() {
           <Route exact path="/" element={<BookForm />} />
           <Route path="/book/:bookName" element={<Book />}/>
           <Route path="*">
-            <h1>404</h1>
-            <p>This is not the webpage you are looking for.</p>
+            <div>
+              <h1>404</h1>
+              <p>This is not the webpage you are looking for.</p> 
+            </div>
           </Route>
         </Routes>
       </div>
