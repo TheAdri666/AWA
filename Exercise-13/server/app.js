@@ -3,12 +3,17 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors');
+const mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const bookRouter = require('./routes/books');
 
 var app = express();
+
+mongoose.connect('mongodb://localhost:27017/mydatabase', { useNewUrlParser: true })
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log(err));
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -30,6 +35,5 @@ if (process.env.NODE_ENV === "production") {
   };
   app.use(cors(corsOptions));
 }
-  
-  
+   
 module.exports = app;
