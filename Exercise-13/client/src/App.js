@@ -12,12 +12,10 @@ function App() {
         <Routes>
           <Route exact path="/" element={<BookForm />} />
           <Route path="/book/:bookName" element={<Book />}/>
-          <Route path="*">
-            <React.Fragment>
+          <Route path="*" element={<div>
               <h1>404</h1>
               <p>This is not the webpage you are looking for.</p> 
-            </React.Fragment>
-          </Route>
+            </div>} />
         </Routes>
       </div>
     </Router>
