@@ -1,5 +1,6 @@
+import React from 'react';
 import './App.css';
-import BookForm from './components/BookForm'
+import BookForm from './components/BookForm';
 import Book from './components/Book';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -12,10 +13,10 @@ function App() {
           <Route exact path="/" element={<BookForm />} />
           <Route path="/book/:bookName" element={<Book />}/>
           <Route path="*">
-            <div>
+            <React.Fragment>
               <h1>404</h1>
               <p>This is not the webpage you are looking for.</p> 
-            </div>
+            </React.Fragment>
           </Route>
         </Routes>
       </div>
