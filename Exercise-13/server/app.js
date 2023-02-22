@@ -11,7 +11,9 @@ const bookRouter = require('./routes/books');
 
 var app = express();
 
-mongoose.connect('mongodb://localhost:27017/mydatabase', { useNewUrlParser: true })
+const mongoDB = process.env.MONGO_URL || 'mongodb://localhost:27017/testdb';
+
+mongoose.connect(mongoDB, { useNewUrlParser: true })
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
