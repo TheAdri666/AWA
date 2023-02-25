@@ -13,7 +13,7 @@ async function saveBook(req, res) {
 }
 
 async function getBook(req, res) {
-  const { name } = req.params
+  const { name } = req.params;
   const book = await Book.findOne({ name });
   if (!book) {
     return res.status(400).send({ msg: 'No book found with that name'});
