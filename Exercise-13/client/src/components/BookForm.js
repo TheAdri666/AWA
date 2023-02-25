@@ -35,7 +35,7 @@ function BookForm() {
       <label htmlFor="pages">Pages:</label>
       <input type="number" id="pages" value={pages} onChange={(event) => setPages(event.target.value)} />
 
-      <button type="submit">Submit</button>
+      <button type="submit" id="submit">Submit</button>
     </form>
   );
 }
