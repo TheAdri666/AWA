@@ -1,7 +1,9 @@
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-const Book = () => {
+function Book() {
   const { bookName } = useParams();
+  const [bookDetails, setBookDetails] = useState(null);
 
   async function fetchBookDetails(bookName) {
     const encodedBookName = encodeURIComponent(bookName);
@@ -13,16 +15,32 @@ const Book = () => {
     return bookDetails;
   }
 
-  const book = fetchBookDetails(bookName);
+  useEffect(() => {
+    async function fetchDetails() {
+      try {
+        const details = await fetchBookDetails(bookName);
+        setBookDetails(details);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchDetails();
+  }, [bookName]);
 
   return (
     <div>
-      <p>{book.name}</p>
-      <p>{book.author}</p>
-      <p>{book.pages}</p>
-      {JSON.stringify(book)}
+      {bookDetails ? (
+        <div>
+          <h2>{bookDetails.name}</h2>
+          <p>{bookDetails.author}</p>
+          <p>{bookDetails.pages}</p>
+        </div>
+      ) : (
+        <p>Loading book details...</p>
+      )}
     </div>
   );
-};
+}
 
 export default Book;
