@@ -20,6 +20,7 @@ const Book = () => {
       <p>{book.name}</p>
       <p>{book.author}</p>
       <p>{book.pages}</p>
+      <p>{...book}</p>
     </div>
   );
 };
