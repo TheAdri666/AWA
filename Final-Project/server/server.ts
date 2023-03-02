@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import app from './app';
 
-const PORT: number = 3000;
+const PORT: number = 1234;
 const mongoDB: string = process.env.MONGO_URL || 'mongodb://localhost:27017/testdb';
 
 mongoose
