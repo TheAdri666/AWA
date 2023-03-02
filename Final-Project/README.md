@@ -9,6 +9,7 @@ This is a web application that allows users to register and log in to a system w
 1. NodeJS backend application.
 2. React frontend application.
 3. MongoDB database.
+4. JWT based authentication.
 
 ## Available npm commands
 
