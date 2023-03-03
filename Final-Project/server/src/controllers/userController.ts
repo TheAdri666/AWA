@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { User } from '../models/User';
-import { AuthenticatedRequest } from '../authenticateJWT';
+import User from '../models/User';
 
 async function findUserByEmail(req: Request, res: Response) {
   try {
@@ -76,32 +75,9 @@ async function login(req: Request, res: Response) {
   }
 }
 
-async function postCodeSnippet(req: AuthenticatedRequest, res: Response) {
-  try {
-    const { title, content } = req.body;
-
-    const userId = req.userId;
-    if (!userId) {
-      return res.status(401).json({ message: 'Unauthorized' });
-    }
-
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(401).json({ message: 'Unauthorized' });
-    }
-
-    const snippet = {
-      title,
-      content,
-      author: userId,
-    };
-
-    user.codeSnippets.push(snippet);
-    await user.save();
-
-    return res.status(201).json(snippet);
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: 'Server error' });
-  }
+export {
+  findUserByEmail,
+  findAllUsers,
+  register,
+  login
 };

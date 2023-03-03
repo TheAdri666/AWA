@@ -37,6 +37,4 @@ const codeSnippetSchema = new Schema({
 
 const CodeSnippet = mongoose.model('Code Snippet', codeSnippetSchema);
 
-export {
-  CodeSnippet
-}
+export default CodeSnippet;

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { CodeSnippet } from './CodeSnippet'
+import CodeSnippet from './CodeSnippet'
 
 const { Schema } = mongoose;
 
@@ -31,6 +31,4 @@ const userSchema = new Schema({
 
 const User = mongoose.model('User', userSchema);
 
-export {
-  User
-}
+export default User;
