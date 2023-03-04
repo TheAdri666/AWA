@@ -3,10 +3,10 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import User from '../models/User';
 
-async function findUserByEmail(req: Request, res: Response) {
+async function findUserById(req: Request, res: Response) {
   try {
-    const { email } = req.params;
-    const user = await User.findOne({ email });
+    const { id } = req.params;
+    const user = await User.findById(id);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -76,7 +76,7 @@ async function login(req: Request, res: Response) {
 }
 
 export {
-  findUserByEmail,
+  findUserById,
   findAllUsers,
   register,
   login

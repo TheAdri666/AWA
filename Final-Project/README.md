@@ -25,3 +25,7 @@ This is a web application that allows users to register and log in to a system w
 1. Assumes that a .env file exists with the key "SECRET".
 2. Unless explicitly stated otherwise with the "MONGO_URL" key it assumes that a MongoDB database is running on the URL "mongodb://localhost:27017/testdb".
 3. Unless explicitly stated otherwise with the "PORT" key it assumes that the server is running on PORT 1234.
+
+## Please Note!
+
+As this is just an educational project the .env file is included in the repository as none of its contents are classified. Note that this is not good practice and should be avoided as it can lead to being hacked.
