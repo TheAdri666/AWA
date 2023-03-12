@@ -5,11 +5,13 @@ const { Schema } = mongoose;
 const codeSnippetSchema = new Schema({
   title: {
     type: String,
-    required: true
+    required: true,
+    index: true
   },
   content: {
     type: String,
-    required: true
+    required: true,
+    index: true
   },
   author: {
     type: Schema.Types.ObjectId,
@@ -34,6 +36,8 @@ const codeSnippetSchema = new Schema({
     },
   ],
 });
+
+codeSnippetSchema.index({ title: 'text', content: 'text' });
 
 const CodeSnippet = mongoose.model('Code Snippet', codeSnippetSchema);
 
