@@ -1,0 +1,13 @@
+.snippet {
+  margin: 15px;
+  padding: 10px;
+  border: 1px solid lightgrey;
+}
+
+.btn {
+  margin: 5px;
+}
+
+input {
+  color: #fff;
+}

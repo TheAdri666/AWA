@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-import CodeSnippet from './CodeSnippet'
 
 const { Schema } = mongoose;
 
+// Users have: a unique email address, a password, a profile picture, an admin status and code snippets they have posted.
 const userSchema = new Schema({
   email: {
     type: String,

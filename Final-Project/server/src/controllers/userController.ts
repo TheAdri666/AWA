@@ -5,6 +5,7 @@ import User from '../models/User';
 
 async function findUserById(req: Request, res: Response) {
   try {
+    // Simply get the id from the params and find a user with the same one.
     const { id } = req.params;
     const user = await User.findById(id);
     if (!user) {
@@ -19,6 +20,7 @@ async function findUserById(req: Request, res: Response) {
 
 async function findAllUsers(req: Request, res: Response) {
   try {
+    // Just a find in the users collection with no filter.
     const users = await User.find();
     return res.status(200).json(users);
   } catch (error) {
@@ -31,13 +33,16 @@ async function register(req: Request, res: Response) {
   try {
     const { email, password } = req.body;
 
+    // If the email already exists the user is not created.
     const userExists = await User.findOne({ email });
     if (userExists) {
       return res.status(400).json({ message: 'Email already registered' });
     }
 
+    // When users are registered their password is stored securely with a hash function.
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // It is good to remember to follow the schema when creating new objects.
     const user = new User({
       email,
       password: hashedPassword,
@@ -52,6 +57,7 @@ async function register(req: Request, res: Response) {
   }
 }
 
+// The login function's main job is to send back a fresh JWT.
 async function login(req: Request, res: Response) {
   try {
     const { email, password } = req.body;

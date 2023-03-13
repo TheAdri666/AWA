@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
+// Code snippets have: a title, content, an author, upvotes, downvotes and comments.
 const codeSnippetSchema = new Schema({
   title: {
     type: String,
@@ -37,6 +38,7 @@ const codeSnippetSchema = new Schema({
   ],
 });
 
+// Title and content are indexable (they can be searched for keywords).
 codeSnippetSchema.index({ title: 'text', content: 'text' });
 
 const CodeSnippet = mongoose.model('Code Snippet', codeSnippetSchema);
