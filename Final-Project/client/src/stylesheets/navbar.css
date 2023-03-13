@@ -13,6 +13,12 @@
   margin-right: 2.5px;
 }
 
+.profile-picture {
+  height: 50px;
+  margin-top: 7px;
+  margin-right: 5px;
+}
+
 .brand-name {
   font-size: min(2rem, 7vw);
   flex-shrink: 1;
